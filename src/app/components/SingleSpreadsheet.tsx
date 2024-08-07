@@ -1,7 +1,4 @@
-import {
-  useCopilotAction,
-  useCopilotReadable,
-} from "@copilotkit/react-core";
+import { useCopilotAction, useCopilotReadable } from "@copilotkit/react-core";
 import React, { useState } from "react";
 import Spreadsheet from "react-spreadsheet";
 import { canonicalSpreadsheetData } from "../utils/canonicalSpreadsheetData";
@@ -17,7 +14,7 @@ const SingleSpreadsheet = ({ spreadsheet, setSpreadsheet }: MainAreaProps) => {
   useCopilotReadable({
     description: "The current spreadsheet",
     value: spreadsheet,
-  })
+  });
 
   useCopilotAction({
     name: "suggestSpreadsheetOverride",
@@ -50,11 +47,11 @@ const SingleSpreadsheet = ({ spreadsheet, setSpreadsheet }: MainAreaProps) => {
       },
     ],
     render: (props) => {
-      const { rows } = props.args
+      const { rows } = props.args;
       const newRows = canonicalSpreadsheetData(rows);
 
       return (
-        <PreviewSpreadsheetChanges 
+        <PreviewSpreadsheetChanges
           preCommitTitle="Replace contents"
           postCommitTitle="Changes committed"
           newRows={newRows}
@@ -66,7 +63,7 @@ const SingleSpreadsheet = ({ spreadsheet, setSpreadsheet }: MainAreaProps) => {
             setSpreadsheet(updatedSpreadsheet);
           }}
         />
-      )
+      );
     },
     handler: ({ rows, title }) => {
       // Do nothing.
@@ -100,16 +97,14 @@ const SingleSpreadsheet = ({ spreadsheet, setSpreadsheet }: MainAreaProps) => {
     ],
     render: (props) => {
       const status = props.status;
-      const { rows } = props.args
+      const { rows } = props.args;
       const newRows = canonicalSpreadsheetData(rows);
       return (
         <div>
           <p>Status: {status}</p>
-          <Spreadsheet
-            data={newRows}
-          />
+          <Spreadsheet data={newRows} />
         </div>
-      )
+      );
     },
     handler: ({ rows }) => {
       const canonicalRows = canonicalSpreadsheetData(rows);
@@ -177,5 +172,3 @@ const SingleSpreadsheet = ({ spreadsheet, setSpreadsheet }: MainAreaProps) => {
 };
 
 export default SingleSpreadsheet;
-
-
